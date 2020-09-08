@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="654.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sourcecode.controller.SettingsLayoutController">
+   <children>
+      <Pane layoutX="24.0" layoutY="25.0" prefHeight="178.0" prefWidth="298.0" styleClass="panelDesign" stylesheets="@../css/centerStyle.css">
+         <children>
+            <Label layoutX="6.0" layoutY="6.0" text="Design">
+               <font>
+                  <Font name="Arial" size="30.0" />
+               </font>
+            </Label>
+            <ColorPicker layoutX="3.0" layoutY="65.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #00CED1;" />
+            <Label layoutX="6.0" layoutY="48.0" text="Lateral" />
+            <Label layoutX="156.0" layoutY="48.0" text="Cima" />
+            <ColorPicker layoutX="156.0" layoutY="65.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #00CED1;" />
+            <JFXComboBox fx:id="combobox" focusColor="DARKTURQUOISE" labelFloat="true" layoutX="3.0" layoutY="108.0" prefHeight="25.0" prefWidth="140.0" promptText="Themes " />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

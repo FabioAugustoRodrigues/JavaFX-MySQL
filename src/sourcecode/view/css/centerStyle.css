@@ -1,0 +1,29 @@
+.button{
+    -fx-background-color: #2F4F4F;
+    -fx-background-radius: 10px;
+    -fx-text-fill: white;
+}
+
+.button:hover{
+    -fx-text-fill: black;
+}
+
+.buttonImg:hover{
+    -fx-padding: 10px;
+}
+
+.table-view {
+    -fx-base: #2F4F4F;
+    -fx-control-inner-background: white;
+    -fx-background-color: white;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.panelDesign{
+    -fx-background-color: white;
+    -fx-border-color: #2F4F4F;
+    -fx-border-style: solid;
+    -fx-border-width: 10px 1px 1px 1px; /* 25px top, 10px right, 4px bottom and 35px left */
+}

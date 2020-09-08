@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sourcecode.controller.RootLayoutController">
+   <top>
+      <AnchorPane prefHeight="90.0" prefWidth="800.0" style="-fx-background-color: #2F4F4F;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="103.0" layoutY="26.0" text="Crud JavaFX+MySQL" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="34.0" />
+               </font></Label>
+            <ImageView fitHeight="54.0" fitWidth="150.0" layoutX="706.0" layoutY="18.0" onMouseClicked="#closeApplication" pickOnBounds="true" preserveRatio="true" rotate="89.7" AnchorPane.leftAnchor="706.0" AnchorPane.rightAnchor="40.0">
+               <image>
+                  <Image url="@../../../resources/images/sair.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="56.0" fitWidth="122.0" layoutX="31.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/images/alvo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <AnchorPane prefHeight="332.0" prefWidth="146.0" style="-fx-background-color: violet;" stylesheets="@../css/rootStyle.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutX="21.0" layoutY="48.0" prefHeight="332.0" prefWidth="146.0" style="-fx-background-color: #00CED1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Button fx:id="btnPerson" mnemonicParsing="false" onAction="#showPeople" prefHeight="116.0" prefWidth="146.0">
+                     <graphic>
+                        <ImageView fitHeight="178.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../resources/images/pessoa.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button mnemonicParsing="false" onAction="#showStatitics" prefHeight="116.0" prefWidth="146.0">
+                     <graphic>
+                        <ImageView fitHeight="178.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../resources/images/estatisticas.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button mnemonicParsing="false" onAction="#showSettings" prefHeight="120.0" prefWidth="146.0">
+                     <graphic>
+                        <ImageView fitHeight="178.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../resources/images/configuracoes.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </left>
+</BorderPane>
