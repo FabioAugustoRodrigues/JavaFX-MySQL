@@ -250,6 +250,10 @@ public class PersonLayoutController implements Initializable {
             // Detecta mudanças de seleção e mostra os detalhes da pessoa quando houver mudança.
             personTable.getSelectionModel().selectedItemProperty().addListener(
                     (observable, oldValue, newValue) -> showNote(newValue));
+            
+            // Configures the textfield
+            loadAutoComplete();
+            
         }catch(NullPointerException npe){
             lblNote.setText("");
         }
@@ -350,6 +354,30 @@ public class PersonLayoutController implements Initializable {
         
         ObservableList<String> obsValues = FXCollections.observableArrayList(values);
         attributeList.setItems(obsValues);
+    }
+    
+    /**
+    * Configures the textfield to receive suggestions
+    */
+    public void loadAutoComplete() {
+        
+        // Variables for autosuggestion :)
+        AutoCompletionBinding<String> acb;
+        Set<String> ps;
+        
+        ArrayList<String> values = new ArrayList();
+        for (int i = 0; i < listPerson.size(); i++){
+            values.add(listPerson.get(i).getName());
+            values.add(listPerson.get(i).getAddress());
+            values.add(listPerson.get(i).getEmail());
+            values.add(listPerson.get(i).getBirthday());
+            values.add(listPerson.get(i).getNumber());
+        }
+        
+        
+        String[] _possibleSuggestions = values.toArray(new String[0]);
+        ps = new HashSet<>(Arrays.asList(_possibleSuggestions));
+        TextFields.bindAutoCompletion(txtSearch, _possibleSuggestions);
     }
     
     /**
