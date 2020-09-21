@@ -1,5 +1,6 @@
 # JavaFX-MySQL
-Simple crud using JavaFX and JPA with Hibernate
+Simple crud using JavaFX and JPA with Hibernate\
+The JavaMail API was also used to send e-mails
 
 
 ## Samples
