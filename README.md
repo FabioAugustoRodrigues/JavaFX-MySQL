@@ -11,3 +11,6 @@ Viewing statistics\
 
 Registering a New Person\
 ![register screen](https://github.com/FabioAugustoRodrigues/JavaFX-MySQL/blob/master/screenshots/newPerson.png)
+
+Emailing area and design settings\
+![settings screen](https://github.com/FabioAugustoRodrigues/JavaFX-MySQL/blob/master/screenshots/Settings.png)
