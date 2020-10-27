@@ -24,7 +24,6 @@ import sourcecode.util.DateUtil;
  */
 public class PersonEditDialogController implements Initializable {
 
-    // == Atributos  ==========================================
     @FXML
     private JFXTextField txtName;
 
@@ -52,22 +51,16 @@ public class PersonEditDialogController implements Initializable {
     private boolean okClicked = false;
     private String insertionType;
     
-    // == Métodos acessaveis pelo JavaFX =======================
-    
     /*
     * Cadastra/Registra uma nova Person
     */
     @FXML
     private void handleNewPerson(ActionEvent event) {
         
-
-        // Verificamos se todos os dados estão corretos para serem inseridos no banco
         if (isInputValid()){             
             
-            // Primaramente verificamos se será Cadadastro ou Atualização
             if (getTitle().equalsIgnoreCase("Register")){
                 
-                // Resgatamos todos os dados do formulário
                 Person personx = new Person();
                 personx.setName(txtName.getText());
                 personx.setBirthday(DateUtil.formatDate(txtBirthday.getValue()));
@@ -76,10 +69,8 @@ public class PersonEditDialogController implements Initializable {
                 personx.setAddress(txtAddress.getText());
                 personx.setNumber(txtNumber.getText()); 
                 
-                // Por fim, persistimos os dados
                 DAO.getInstance().persist(personx);     
             }else{  
-                // Resgatamos todos os dados do formulário
                 person.setName(txtName.getText());
                 person.setBirthday(DateUtil.formatDate(txtBirthday.getValue()));
                 person.setEmail(txtEmail.getText());
@@ -87,7 +78,6 @@ public class PersonEditDialogController implements Initializable {
                 person.setAddress(txtAddress.getText());
                 person.setNumber(txtNumber.getText()); 
 
-                // E por fim, alteramos no banco de dados
                 DAO.getInstance().merge(person);
             }
             
@@ -148,7 +138,6 @@ public class PersonEditDialogController implements Initializable {
         if (errorMessage.length() == 0){
             return true;
         }else{
-            // Mostra a mensagem de erro.
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Campos Inválidos");
             alert.setHeaderText("Por favor, corrija os campos inválidos");

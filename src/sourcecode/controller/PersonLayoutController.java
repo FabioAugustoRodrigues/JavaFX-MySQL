@@ -96,16 +96,11 @@ public class PersonLayoutController implements Initializable {
     */
     @FXML
     void actionUpdate(ActionEvent event) {
-        // Caso o usuário não tenha selecionado um registro, o valor de index será -1
-        // Por isso, aqui, verificamos se o index é maior que -1. Caso seja, chamamos 
-        // o PersonEditDialogController que vai tratar da atualização dos dados e tals
         if (personTable.getSelectionModel().getSelectedIndex() > -1){
             if (mainApp.showPersonEditDialog("Update", personTable.getSelectionModel().getSelectedItem()));
             
-            // Caso o usuário tenha sido alterado com sucesso, carregamos novamente a tela
             loadPerson(true);
         }else{
-            // Se o usuário não selecionou um registro, informamos um erro ao usuário
             if (listPerson.isEmpty()){
                 alert("Erro", "Não há registros para editar", "Cadastre uma nova pessoa", Alert.AlertType.ERROR);
             }else{
@@ -121,10 +116,6 @@ public class PersonLayoutController implements Initializable {
     void actionDelete(ActionEvent event) {
         if (personTable.getSelectionModel().getSelectedIndex() > -1){
        
-            /*
-                Primeiramente, criamos um alert para o usuário confirmar que quer excluir
-                tal Person
-            */
             Alert dialogoExe = new Alert(Alert.AlertType.CONFIRMATION);
             ButtonType btnYes = new ButtonType("Yes");
             ButtonType btnNoAnswer = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -142,7 +133,6 @@ public class PersonLayoutController implements Initializable {
             });
            
         }else{ 
-            // Se o usuário não selecionou um registro, informamos um erro ao usuário
             if (listPerson.isEmpty()){
                 alert("Erro", null, "Não há registros para deletar", Alert.AlertType.ERROR);
             }else{
@@ -157,20 +147,12 @@ public class PersonLayoutController implements Initializable {
     @FXML
     void actionSearch(ActionEvent event) {
         try{
-            // Se o usuáro selecionou "Show everyone" no combobox e apertou enter/botão
-            // a lista será carregada novamente
             if (attributeList.getValue().equals("Show everyone")){
                 loadPerson(true);
             }else{
                 
-                // ArrayList que vai armazenar as Person que encontrar
                 ArrayList<Person> people = new ArrayList();
                 
-                /*
-                    Quando o usuário for pesquisar um registro, primeiro ele seleciona o tipo de
-                    coluna no combobox para ter uma referência, e aqui, no código abaixo 
-                    fazemos a estrutura que irá selecionar o registro pelo tipo de coluna
-                */
                 switch (attributeList.getValue()) {
                     case "ID":
                         people.add(DAO.getInstance().findById(Integer.parseInt(txtSearch.getText())));
@@ -224,7 +206,6 @@ public class PersonLayoutController implements Initializable {
     */
     @FXML
     void keyPressed(KeyEvent event) {
-        // Limpando a mensagem de erro
         lblError.setText("");
             
     }
@@ -245,18 +226,13 @@ public class PersonLayoutController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        // Carregamos os dados do banco de dados para a tabela
         loadPerson(false);
-        
-        // Carregamos os dados no combobox
         loadCombobox();
         
         try{
-            // Detecta mudanças de seleção e mostra os detalhes da pessoa quando houver mudança.
             personTable.getSelectionModel().selectedItemProperty().addListener(
                     (observable, oldValue, newValue) -> showNote(newValue));
             
-            // Configures the textfield
             loadAutoComplete();
             
         }catch(NullPointerException npe){
@@ -269,25 +245,16 @@ public class PersonLayoutController implements Initializable {
     */
     public boolean loadPerson(boolean cleanTable){
         
-        // LIMPA A TABELA CASO HAJA ALGO NELA
-        // INSERE OS TIPOS DE DADOS PARA AS COLUNAS
-        // RECEBE OS DADOS DO BANCO DE DADOS
-        // INSERE OS DADOS NA TABELA
-        
         try{
-            
-            // Limpa a tabela
+
             if (cleanTable){
                 cleanTable();
             }
             
-            // Definimos os tipos de atributos para as colunas
             definingColumn();
-            
-            // Inserimos uma lista de pessoas na listPersons
+        
             setListPerson(DAO.getInstance().findAll());
 
-            // Por fim, populamos a tabela
             observableListPerson = FXCollections.observableArrayList(listPerson);
             personTable.setItems(observableListPerson);
             

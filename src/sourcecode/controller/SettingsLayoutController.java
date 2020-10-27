@@ -67,9 +67,7 @@ public class SettingsLayoutController implements Initializable {
     @FXML
     public void attachFile(ActionEvent event) {
         if (rdAttach.isSelected()){
-            // Caso o componente radioAnexo esteja selecionado, ele abre a caixa de arquivos
-            // para o usuário selecionar o anexo que deseja enviar por e-mail
-            
+    
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
             FileChooser fileChooser = new FileChooser();
@@ -79,13 +77,6 @@ public class SettingsLayoutController implements Initializable {
 
             if (file != null){
                 
-                // Como o nome do arquivo pode vim muito grande, resolvi diminuir o tamanho
-                // da váriavel que for apresentada, por exemplo: 
-                // C://Documents//Books//4586734893.pdf para -> C://Documents//Bo...
-                
-                /*
-                * No caso usamos um for para diminuir o tamanho da palavra
-                */
                 String nameFile = "";
                 char[] fileC = (file+"").toCharArray();
                 for (int i = 0; i < (file+"").length(); i++){
@@ -96,8 +87,7 @@ public class SettingsLayoutController implements Initializable {
                     nameFile += fileC[i];
                 }
                 attach = file.toString();
-                
-                // Inserimos o texto (filename) no texto do radiobutton
+
                 rdAttach.setText(nameFile.toString());
             }else{
                 attach = null;
@@ -114,33 +104,17 @@ public class SettingsLayoutController implements Initializable {
     */
     @FXML
     public void sendEmail(ActionEvent event) {
-        
-        /* Verificando se os campos foram preenchidos */
+
         if (isInputValid()){
 
-            /*
-                Verificamos se o radioButton All está selecionado
-                Caso esteja, significa que é para enviar mensagens para todos os emails cadastrados
-            */
             if (rdAll.isSelected()){
 
-                /*
-                * Como o usuário usou o RadioButton para enviar emails para todos os cadastrados
-                * devemos verificar, pelo menos, se há cadastrados. Caso não haja lançamos um alerta!
-                */
                 if (emails.isEmpty() || emails == null){
                     alert("Error", "No emails", "You have to register at least one person to send email!",
                             Alert.AlertType.INFORMATION);
                 }else{
-                    /*
-                    * Para enviar mensagens para todos os emails, precisamos de uma String
-                    * nesse formato: "example1@gmail.com, example2@gmail.com"
-                    * o problema é que a recebemos no formato "[example1@gmail.com, example2@gmail.com]"
-                    * para esse caso é só usar o método replace que tira os colchetes
-                    */
                     String emailsX = emails.toString().replace("[", "").replace("]", "");
-                    
-                    // Enviando e-mail, caso haja algum ero lançamos um alerta
+ 
                     if (SendEmail.sendEmailAll(txtEmail.getText(), txtPassword.getText(), emailsX, 
                         txtSubject.getText(), txtContent.getText(), attach)){
                         alert("Ready", null, "Sent with success!",
@@ -151,7 +125,6 @@ public class SettingsLayoutController implements Initializable {
                     }
                 }
             }else{
-                // Enviando e-mail, caso haja algum ero lançamos um alerta
                 if(SendEmail.sendEmail(txtEmail.getText(), txtPassword.getText(), cbReceiver.getValue(), 
                     txtSubject.getText(), txtContent.getText(), attach)){
                     alert("Ready", null, "Sent with success!",

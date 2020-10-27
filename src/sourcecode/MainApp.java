@@ -22,30 +22,23 @@ import sourcecode.controller.RootLayoutController;
  * @author Fábio Augusto Rodrigues 
  */
 public class MainApp extends Application {
-    
-    // Stage da tela principal
+
     private Stage primaryStage;
     
-    // BorderPane da tela, onde fica os botões Person, Statitics e Configs
     private BorderPane rootLayout; 
     
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        // Iniciando a tela
         this.primaryStage = primaryStage;
         
-        // Setando um nome a tela
         this.primaryStage.setTitle("CRUD JavaFX");
         
-        // Setando o icone da aplicação
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/images/informacao-pessoal.png")));
 
-        // Iniciando o LayoutPrincipal e setando o crud de person
-        if (initRootLayout()){ // Caso returne true (sem erros)
-            showPersonLayout(); // setamos o o crud person
+        if (initRootLayout()){ 
+            showPersonLayout();
         }else{
-            // Mostra a mensagem de erro.
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");
             alert.setHeaderText("Erro inesperado");
@@ -61,12 +54,10 @@ public class MainApp extends Application {
     public boolean initRootLayout(){
         
         try{
-            // Carrega o root layout do arquivo fxml.
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(MainApp.class.getResource("view/fxml/RootLayout.fxml"));
             rootLayout = (BorderPane) fxmlLoader.load();
 
-            // Mostra a scene (cena) contendo o root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             
@@ -88,16 +79,13 @@ public class MainApp extends Application {
     */
     public boolean showPersonLayout(){
         try { 
-            // Carrega a PersonLayout
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/fxml/PersonLayout.fxml"));
 
             AnchorPane personLayout = (AnchorPane) loader.load();
             
-            // Define a PersonLayout no centro do RootLayout.
             rootLayout.setCenter(personLayout);
   
-            // Dá ao controlador acesso à the main app.
             PersonLayoutController controller = loader.getController();
             controller.setMainApp(this);
 
@@ -113,17 +101,14 @@ public class MainApp extends Application {
     */
     public boolean showStatitics(){
         try { 
-            // Carrega a PersonLayout
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/fxml/StatiticsLayout.fxml"));
             
             AnchorPane personLayout = (AnchorPane) loader.load();
-            
-            // Define a PersonLayout no centro do RootLayout.
+
             rootLayout.setCenter(null);
             rootLayout.setCenter(personLayout);
   
-            // Dá ao controlador acesso à the main app.
             // StatiticsController controller = loader.getController();
             // controller.setMainApp(this);
 
@@ -139,17 +124,14 @@ public class MainApp extends Application {
     */
     public boolean showSettings(){
         try { 
-            // Carrega a PersonLayout
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/fxml/SettingsLayout.fxml"));
             
             AnchorPane personLayout = (AnchorPane) loader.load();
             
-            // Define a PersonLayout no centro do RootLayout.
             rootLayout.setCenter(null);
             rootLayout.setCenter(personLayout);
   
-            // Dá ao controlador acesso à the main app.
             // StatiticsController controller = loader.getController();
             // controller.setMainApp(this);
 
@@ -166,12 +148,10 @@ public class MainApp extends Application {
     */
     public boolean showPersonEditDialog(String title, Person person){
         try{
-            // Carrega a PersonEditDialog
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/fxml/PersonEditDialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
           
-            // Cria o palco dialogStage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle(title);
             dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -179,14 +159,12 @@ public class MainApp extends Application {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
             dialogStage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/images/adicionar.png")));
-            
-            // Passa as propriedades para o controller
+
             PersonEditDialogController controller = loader.getController();
             controller.setTitle(title);
             controller.setDialogStage(dialogStage);
             controller.setPerson(person);
             
-            // Mostra a janela e espera até o usuário fechar.
             dialogStage.showAndWait();
             
             return controller.isOkClicked();

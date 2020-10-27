@@ -37,10 +37,8 @@ public class StatiticsController implements Initializable {
         String[] months = {"Jan", "Feb", "Mar", "Apr", "May",
                            "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
         
-        // Converte o array em uma lista e adiciona em nossa ObservableList de meses.
         monthNames.addAll(Arrays.asList(months));
         
-        // Associa os nomes de mês como categorias para o eixo horizontal.
         xAxis.setCategories(monthNames);
         
         setPersonData(DAO.getInstance().findAll());
