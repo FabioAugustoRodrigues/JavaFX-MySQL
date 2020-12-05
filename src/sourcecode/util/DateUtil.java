@@ -9,19 +9,11 @@ import java.time.format.DateTimeFormatter;
  */
 public class DateUtil {
     
-    /**
-    * Recebe um objeto do tipo LocalDate e retorna no tipo String
-    * @param localDate
-    */
     public static String formatDate(LocalDate localDate){  
         DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return localDate.format(formatDate);
     }
     
-    /**
-    * Recebe um objeto do tipo String e retorna no tipo LocalDate
-    * @param date
-    */
     public static LocalDate formatDate(String date){
         try{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -32,11 +24,6 @@ public class DateUtil {
         }
     }
     
-    /**
-    * Faz uma comparação entre anos e retorna true se date.getYears() for maior que age
-    * @param date
-    * @param age
-    */
     public static boolean checkAge(LocalDate date, int age){
         if ((LocalDate.now().getYear()-date.getYear()) >= age){
             return true;
