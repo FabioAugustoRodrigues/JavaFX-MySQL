@@ -45,7 +45,7 @@ public class RootLayoutController implements Initializable {
             DAO.getInstance().closeEntityManager();
             System.exit(0);
         }catch(Exception e){
-            System.out.println("Erro ao fechar a aplicação");
+            System.out.println("Error when closing the application");
         }
     }
     
