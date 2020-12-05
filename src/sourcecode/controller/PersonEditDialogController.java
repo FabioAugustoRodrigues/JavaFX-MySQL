@@ -51,9 +51,6 @@ public class PersonEditDialogController implements Initializable {
     private boolean okClicked = false;
     private String insertionType;
     
-    /*
-    * Cadastra/Registra uma nova Person
-    */
     @FXML
     private void handleNewPerson(ActionEvent event) {
         
@@ -86,52 +83,40 @@ public class PersonEditDialogController implements Initializable {
         }      
     }
 
-    /**
-    * Sai da tela de cadastro
-    */
     @FXML
     void handleCancel(ActionEvent event) {
         dialogStage.close();
     }
     
-    
-    /**
-     * Inicializa a classe do controlador.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
     }  
-    
-    // == Métodos da classe ======================================
-    
-    /**
-    * Verifica se os dados inseridos no formulário estão inseridos corretamente
-    */
+
     public boolean isInputValid(){
         
         String errorMessage = "";
         
         if (txtName.getText() == null || txtName.getText().length() == 0){
-            errorMessage += "Nome inválido!\n";
+            errorMessage += "Invalid name!\n";
         }
         
         if (txtBirthday.getValue() == null){
-            errorMessage += "Data de nascimento inválido!\n";
+            errorMessage += "Invalid date of birth!\n";
         }else{
             if (!DateUtil.checkAge(txtBirthday.getValue(), 16)){
-                errorMessage += "Menores de 16 anos não podem ser cadastrados!\n";
+                errorMessage += "Children under 16 years old cannot be registered!\n";
             }
         }
         
         if (txtEmail.getText() == null || txtEmail.getText().length() == 0){
-            errorMessage += "E-mail inválido!\n";
+            errorMessage += "Invalid email!\n";
         }
         if (txtNumber.getText() == null || txtNumber.getText().length() == 0){
-            errorMessage += "Número inválido!\n";
+            errorMessage += "Invalid number!\n";
         }
         if (txtAddress.getText() == null || txtAddress.getText().length() == 0){
-            errorMessage += "Endereço inválido!\n";
+            errorMessage += "Invalid address!\n";
         }
         
         
@@ -139,8 +124,8 @@ public class PersonEditDialogController implements Initializable {
             return true;
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Campos Inválidos");
-            alert.setHeaderText("Por favor, corrija os campos inválidos");
+            alert.setTitle("Invalid Fields");
+            alert.setHeaderText("Please correct the invalid fields");
             alert.setContentText(errorMessage);
             alert.showAndWait();
             return false;
@@ -149,14 +134,10 @@ public class PersonEditDialogController implements Initializable {
     }
     
     
-    // Getters e setters
     public String getTitle() {
         return title;
     }
 
-    /**
-    * Inserindo o título na panel superior
-    */
     public void setTitle(String title) {
         this.title = title;
         
@@ -167,28 +148,14 @@ public class PersonEditDialogController implements Initializable {
         }
     }
     
-    /**
-     * Define o palco deste dialog.
-     * 
-     * @param dialogStage
-     */
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
     
-    /**
-     * Retorna true se o usuário clicar OK,caso contrário false.
-     * 
-     * @return 
-     */
     public boolean isOkClicked() {
         return okClicked;
     }
  
-    /**
-    * Define a Person da seção
-    * @param person
-    */
     public void setPerson(Person person){
         this.person = person;
         
@@ -202,7 +169,6 @@ public class PersonEditDialogController implements Initializable {
         }
     }
     
-    // Retorna a Person da seção
     public Person getPerson(){
         return person;
     }
