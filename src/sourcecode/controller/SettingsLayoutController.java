@@ -61,9 +61,6 @@ public class SettingsLayoutController implements Initializable {
     private List<String> emails;
     private String attach = null;
     
-    /*
-    * Selecionar um arquivo (anexo) para enviar por email
-    */
     @FXML
     public void attachFile(ActionEvent event) {
         if (rdAttach.isSelected()){
@@ -99,9 +96,6 @@ public class SettingsLayoutController implements Initializable {
         }
     }
     
-    /*
-    * Envia e-mail
-    */
     @FXML
     public void sendEmail(ActionEvent event) {
 
@@ -137,10 +131,6 @@ public class SettingsLayoutController implements Initializable {
         }
     }
     
-    /*
-    * Se o usuário clicar no RadioButton All, deixará o combobox desativado
-    * para enviar mensagens para todos os email dos cadastrados
-    */
     @FXML
     public void selectAll(ActionEvent event) {
         if (rdAll.isSelected()){
@@ -153,18 +143,12 @@ public class SettingsLayoutController implements Initializable {
         }
     }
     
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loadComboboxDesign();
         loadComboboxEmail();
     }    
     
-    /**
-    * Mostra um alerta
-    */
     private void alert(String titulo, String headerText, String contentText, Alert.AlertType type){
         Alert alert = new Alert(type);
         alert.setTitle(titulo);
@@ -173,9 +157,6 @@ public class SettingsLayoutController implements Initializable {
         alert.showAndWait();
     }
     
-    /**
-    * Verifica se os dados inseridos no formulário estão inseridos corretamente
-    */
     public boolean isInputValid(){
         
         String errorMessage = "";
@@ -191,7 +172,6 @@ public class SettingsLayoutController implements Initializable {
         if (errorMessage.length() == 0){
             return true;
         }else{
-            // Mostra a mensagem de erro.
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please, correct the fields!");
@@ -201,9 +181,6 @@ public class SettingsLayoutController implements Initializable {
         }
     }
     
-    /**
-    *   Limpa todos os campos de Communication
-    */
     public void clearFieldsEmail(){
         txtEmail.setText("");
         txtSubject.setText("");
@@ -216,9 +193,6 @@ public class SettingsLayoutController implements Initializable {
         txtPassword.setText("");
     }
     
-    /*
-    * Carrega o combobox email com todos os emails dos cadastrados
-    */
     public void loadComboboxEmail(){
         emails = new ArrayList();
         
