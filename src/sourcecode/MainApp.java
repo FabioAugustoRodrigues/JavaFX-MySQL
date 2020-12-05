@@ -18,7 +18,7 @@ import sourcecode.controller.PersonLayoutController;
 import sourcecode.controller.RootLayoutController;
 
 /**
- * classe Main
+ * 
  * @author Fábio Augusto Rodrigues 
  */
 public class MainApp extends Application {
@@ -40,17 +40,14 @@ public class MainApp extends Application {
             showPersonLayout();
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText("Erro inesperado");
-            alert.setContentText("Ocorreu um erro ao tentar iniciar o programa");
+            alert.setTitle("Error");
+            alert.setHeaderText("Unexpected error");
+            alert.setContentText("An error occurred while trying to start the program");
             alert.showAndWait();
         }
         
     }
 
-    /*
-    * Inicia o Layout principal - RootLayout.fxml
-    */
     public boolean initRootLayout(){
         
         try{
@@ -72,11 +69,6 @@ public class MainApp extends Application {
         return true;
     }
     
-    // == SCREENS ================================================================
-    
-    /*
-    * Seta no Layout Principal (RootLayout.fxml) a tela de crud de Person
-    */
     public boolean showPersonLayout(){
         try { 
             FXMLLoader loader = new FXMLLoader();
@@ -96,9 +88,6 @@ public class MainApp extends Application {
         return true;
     }
     
-    /*
-    * Seta no Layout Principal (RootLayout.fxml) a tela de estatísticas
-    */
     public boolean showStatitics(){
         try { 
             FXMLLoader loader = new FXMLLoader();
@@ -119,9 +108,6 @@ public class MainApp extends Application {
         return true;
     }
     
-    /*
-    * Seta no Layout Principal (RootLayout.fxml) a tela de configurações
-    */
     public boolean showSettings(){
         try { 
             FXMLLoader loader = new FXMLLoader();
@@ -136,16 +122,12 @@ public class MainApp extends Application {
             // controller.setMainApp(this);
 
         } catch (IOException e) {
-            e.printStackTrace();
             return false;
         }
         
         return true;
     }
     
-    /*
-    * Edita/Cadastra nova Person
-    */
     public boolean showPersonEditDialog(String title, Person person){
         try{
             FXMLLoader loader = new FXMLLoader();
@@ -174,9 +156,6 @@ public class MainApp extends Application {
        
     }
     
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         launch(args);
     }
