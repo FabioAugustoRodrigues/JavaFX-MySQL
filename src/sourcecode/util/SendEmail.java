@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sourcecode.util;
 
 import java.util.Properties;
@@ -27,16 +22,12 @@ import org.apache.commons.mail.MultiPartEmail;
 
 /**
  *
- * @author Matheus
+ * @author Fábio Augusto Rodrigues
  */
 public class SendEmail {
     
-    /*
-    *  Envia mensagem de email com (ou sem) anexo para um email
-    */
     public static boolean sendEmail(String from, String password, String to, String title, String content, String anexo){
-        
-        // Creamos a mensagem de e-mail
+
         MultiPartEmail email = new MultiPartEmail();
         email.setHostName("smtp.gmail.com");
         email.setSslSmtpPort("465");
@@ -54,18 +45,15 @@ public class SendEmail {
             email.addTo(to);
 
             if (anexo != null){
-                // Creamos o anexo
                 EmailAttachment attachment = new EmailAttachment();
                 attachment.setPath(anexo);
                 attachment.setDisposition(EmailAttachment.ATTACHMENT);
                 attachment.setDescription("Send e-mail");
                 attachment.setName("E-mails");
-
-                // adicionando o anexo
+                
                 email.attach(attachment);
             }
-            
-            // enviando o e-mail
+
             email.send();
                 
         }catch(Exception error){
@@ -75,14 +63,11 @@ public class SendEmail {
        return true;
     }
     
-    /*
-    * Envia e-mail para uma lista de emails
-    */
     public static boolean sendEmailAll(String from, String password, String emails, String subject, String content,
         String attach){   
         
         Properties props = new Properties();
-        /** Parâmetros de conexão com servidor Gmail */
+
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
@@ -98,7 +83,6 @@ public class SendEmail {
                }
           });
 
-        /** Ativa Debug para sessão */
         session.setDebug(true);
 
         try {
@@ -113,41 +97,31 @@ public class SendEmail {
             message.setSubject(subject);//Assunto
             message.setText(content);
             
-            // Verificando se há anexo para enviar
             if (attach != null){
                 
-                // Criamos o anexo
                 EmailAttachment attachment = new EmailAttachment();
                 attachment.setPath(attach);
                 attachment.setDisposition(EmailAttachment.ATTACHMENT);
                 attachment.setDescription("Send e-mail");
                 
-                // Create the message part
                 BodyPart messageBodyPart = new MimeBodyPart();
 
-                // Now set the actual message
                 messageBodyPart.setText("This is message body");
                 
                 Multipart multipart = new MimeMultipart();
-
-                // Set text message part
                 multipart.addBodyPart(messageBodyPart);
 
-                // Part two is attachment
                 messageBodyPart = new MimeBodyPart();
                 DataSource source = new FileDataSource(attach);
                 messageBodyPart.setDataHandler(new DataHandler(source));
                 messageBodyPart.setFileName(attach);
                 multipart.addBodyPart(messageBodyPart);
 
-                // Send the complete message parts
                 message.setContent(multipart);
             }
             
-            /**Método para enviar a mensagem criada*/
             Transport.send(message);
 
-            System.out.println("Feito!!!");
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
