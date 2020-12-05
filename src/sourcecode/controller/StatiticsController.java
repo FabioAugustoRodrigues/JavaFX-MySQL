@@ -44,9 +44,6 @@ public class StatiticsController implements Initializable {
         setPersonData(DAO.getInstance().findAll());
     }    
     
-    /**
-    * Insere os dados no gráfico - meses em que mais tem aniversário
-    */
     public void setPersonData(List<Person> persons){
         
         int[] monthCounter = new int[12];
