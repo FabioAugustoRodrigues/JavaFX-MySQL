@@ -70,20 +70,12 @@ public class PersonLayoutController implements Initializable {
     @FXML
     private Label lblError;
     
-    // Lista de Person
     private List<Person> listPerson = new ArrayList();
     
-    // ObservableLisr de Person
     private ObservableList<Person> observableListPerson;
     
-    // Istância da MainApp
     MainApp mainApp;
    
-    // == Métodos =================================================
-    
-    /**
-    *  Abre uma nova view para cadastrar uma nova Person
-    */
     @FXML
     void actionRegister(ActionEvent event) {
         if (mainApp.showPersonEditDialog("Register", null)){
@@ -91,9 +83,6 @@ public class PersonLayoutController implements Initializable {
         }
     }
    
-    /**
-    *   Abre uma nova view para editar um Person
-    */
     @FXML
     void actionUpdate(ActionEvent event) {
         if (personTable.getSelectionModel().getSelectedIndex() > -1){
@@ -102,16 +91,13 @@ public class PersonLayoutController implements Initializable {
             loadPerson(true);
         }else{
             if (listPerson.isEmpty()){
-                alert("Erro", "Não há registros para editar", "Cadastre uma nova pessoa", Alert.AlertType.ERROR);
+                alert("Error", "Não há registros para editar", "Register a new person", Alert.AlertType.ERROR);
             }else{
-                alert("Erro", "Selecione um registro", "Para editar precisa selecionar um registro da tabela", Alert.AlertType.ERROR);
+                alert("Error", "Select a record", "To edit you need to select a record from the table", Alert.AlertType.ERROR);
             }
         }
     }
     
-    /**
-    *   Deleta o registro selecionado na tabela
-    */
     @FXML
     void actionDelete(ActionEvent event) {
         if (personTable.getSelectionModel().getSelectedIndex() > -1){
@@ -120,9 +106,9 @@ public class PersonLayoutController implements Initializable {
             ButtonType btnYes = new ButtonType("Yes");
             ButtonType btnNoAnswer = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
             
-            dialogoExe.setTitle("Atenção!");
-            dialogoExe.setHeaderText("Informe se você quer deletar");
-            dialogoExe.setContentText("Você quer deletar " + personTable.getSelectionModel().getSelectedItem().getName() + "?");
+            dialogoExe.setTitle("Attention!");
+            dialogoExe.setHeaderText("Inform if you want to delete");
+            dialogoExe.setContentText("Delete " + personTable.getSelectionModel().getSelectedItem().getName() + "?");
             dialogoExe.getButtonTypes().setAll(btnYes, btnNoAnswer);
             
             dialogoExe.showAndWait().ifPresent(b -> {
@@ -134,16 +120,13 @@ public class PersonLayoutController implements Initializable {
            
         }else{ 
             if (listPerson.isEmpty()){
-                alert("Erro", null, "Não há registros para deletar", Alert.AlertType.ERROR);
+                alert("Error", null, "There are no records to delete", Alert.AlertType.ERROR);
             }else{
-                alert("Erro", "Selecione um registro", "Para deletar precisa selecionar um registro da tabela", Alert.AlertType.ERROR);
+                alert("Error", "Select a record", "To delete you need to select a record from the table", Alert.AlertType.ERROR);
             }
         }
     }
     
-    /**
-    *   Pesquisa por um usuário a partir do valor inserido no txtSearch
-    */
     @FXML
     void actionSearch(ActionEvent event) {
         try{
@@ -194,25 +177,18 @@ public class PersonLayoutController implements Initializable {
                 loadPerson(people);
             }
         }catch(NumberFormatException ime){
-            lblError.setText("Insira o tipo de valor correto!!");
+            lblError.setText("Enter the valid value type");
         }catch(NullPointerException npe){
-            lblError.setText("Insira algum valor");
+            lblError.setText("Enter some value");
         }
     }
     
-    /**
-    * Limpa a mensagem de erro - caso ela esteja lá - quando o usuário digitar algo
-    * no formulário
-    */
     @FXML
     void keyPressed(KeyEvent event) {
         lblError.setText("");
             
     }
     
-    /** 
-    * Se o valor selecionado no Combobox for "Show everyone" ele atualiza a tabela
-    */
     @FXML
     void actionCombobox(ActionEvent event) {
         if (attributeList.getValue().equals("Show everyone")){
@@ -220,9 +196,6 @@ public class PersonLayoutController implements Initializable {
         }
     }
     
-    /**
-     * Inicializa o método initialize. Funciona como um construtor
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -240,9 +213,6 @@ public class PersonLayoutController implements Initializable {
         }
     }    
     
-    /**
-    * Resgata os dados do banco de dados e insere na tabela
-    */
     public boolean loadPerson(boolean cleanTable){
         
         try{
@@ -259,7 +229,7 @@ public class PersonLayoutController implements Initializable {
             personTable.setItems(observableListPerson);
             
         }catch(Exception e){
-            alert("Erro", null, "Ocorreu um erro ao resgatar os dados", Alert.AlertType.ERROR);
+            alert("Error", null, "An error occurred while retrieving data", Alert.AlertType.ERROR);
             return false;
         }
         
@@ -267,22 +237,16 @@ public class PersonLayoutController implements Initializable {
     }
     
     
-    /** 
-    * Recebe uma lista de Person e a insere na tabela
-    */
     public void loadPerson(ArrayList<Person> arrayListPerson){
          try{
             cleanTable();
             observableListPerson = FXCollections.observableArrayList(arrayListPerson);
             personTable.setItems(observableListPerson);
         }catch(Exception e){
-            alert("Erro", null, "Ocorreu um erro ao resgatar os dados", Alert.AlertType.ERROR);
+            alert("Error", null, "An error occurred while retrieving data", Alert.AlertType.ERROR);
         }
     }
     
-    /**
-    *   Define os tipos de atributo de cada colunaS
-    */
     public void definingColumn(){
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
         columnAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -291,16 +255,10 @@ public class PersonLayoutController implements Initializable {
         columnBirthday.setCellValueFactory(new PropertyValueFactory<>("birthday"));
     }
 
-    /**
-    * Limpa a tabela
-    */
     private void cleanTable(){
         personTable.getItems().clear();
     }
     
-    /**
-    * Mostra um alerta
-    */
     private void alert(String titulo, String headerText, String contentText, Alert.AlertType type){
         Alert alert = new Alert(type);
         alert.setTitle(titulo);
@@ -309,9 +267,6 @@ public class PersonLayoutController implements Initializable {
         alert.showAndWait();
     }
     
-    /**
-    *  Carrega os tipos de itens no combobox para realizar a pesquisa
-    */
     public void loadCombobox(){
         
         List<String> values = new ArrayList();
@@ -328,9 +283,7 @@ public class PersonLayoutController implements Initializable {
         attributeList.setItems(obsValues);
     }
     
-    /**
-    * Configures the textfield to receive suggestions
-    */
+
     public void loadAutoComplete() {
         
         // Variables for autosuggestion :)
@@ -352,14 +305,10 @@ public class PersonLayoutController implements Initializable {
         TextFields.bindAutoCompletion(txtSearch, _possibleSuggestions);
     }
     
-    /**
-    * Mostra as observações da Person
-    */
     public void showNote(Person person){
         lblNote.setText(person.getNote());
     }
     
-    // Getters e setters
     public List<Person> getListPerson() {
         return listPerson;
     }
