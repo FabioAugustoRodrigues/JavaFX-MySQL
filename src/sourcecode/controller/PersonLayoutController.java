@@ -91,7 +91,7 @@ public class PersonLayoutController implements Initializable {
             loadPerson(true);
         }else{
             if (listPerson.isEmpty()){
-                alert("Error", "Não há registros para editar", "Register a new person", Alert.AlertType.ERROR);
+                alert("Error", "There are no records to edit", "Register a new person", Alert.AlertType.ERROR);
             }else{
                 alert("Error", "Select a record", "To edit you need to select a record from the table", Alert.AlertType.ERROR);
             }
@@ -134,42 +134,27 @@ public class PersonLayoutController implements Initializable {
                 loadPerson(true);
             }else{
                 
-                ArrayList<Person> people = new ArrayList();
+                List<Person> people = new ArrayList();
                 
                 switch (attributeList.getValue()) {
                     case "ID":
                         people.add(DAO.getInstance().findById(Integer.parseInt(txtSearch.getText())));
                         break;
                     case "Name":
-                        for (int i = 0; i < listPerson.size(); i++){
-                            if (txtSearch.getText().equalsIgnoreCase(listPerson.get(i).getName())){
-                                people.add(listPerson.get(i));
-                            }
-                        }   break;
+                        people = DAO.getInstance().findByName(txtSearch.getText());
+                        break; 
                     case "Address":
-                        for (int i = 0; i < listPerson.size(); i++){
-                            if (txtSearch.getText().equalsIgnoreCase(listPerson.get(i).getAddress())){
-                                people.add(listPerson.get(i));
-                            }
-                        }   break;
+                        people = DAO.getInstance().findByAddress(txtSearch.getText()); 
+                        break;
                     case "E-mail":
-                        for (int i = 0; i < listPerson.size(); i++){
-                            if (txtSearch.getText().equalsIgnoreCase(listPerson.get(i).getEmail())){
-                                people.add(listPerson.get(i));
-                            }
-                        }   break;
+                        people = DAO.getInstance().findByEmail(txtSearch.getText()); 
+                        break;
                     case "Birthday":
-                        for (int i = 0; i < listPerson.size(); i++){
-                            if (txtSearch.getText().equalsIgnoreCase(listPerson.get(i).getBirthday())){
-                                people.add(listPerson.get(i));
-                            }
-                        }   break;
+                        people = DAO.getInstance().findByBirthday(txtSearch.getText()); 
+                        break;
                     case "Number":
-                        for (int i = 0; i < listPerson.size(); i++){
-                            if (txtSearch.getText().equalsIgnoreCase(listPerson.get(i).getNumber())){
-                                people.add(listPerson.get(i));
-                            }
-                        }   break;
+                        people = DAO.getInstance().findByNumber(txtSearch.getText()); 
+                        break;
                     default:
                         break;
                 }
@@ -237,7 +222,7 @@ public class PersonLayoutController implements Initializable {
     }
     
     
-    public void loadPerson(ArrayList<Person> arrayListPerson){
+    public void loadPerson(List<Person> arrayListPerson){
          try{
             cleanTable();
             observableListPerson = FXCollections.observableArrayList(arrayListPerson);
