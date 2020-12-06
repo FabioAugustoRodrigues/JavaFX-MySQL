@@ -1,9 +1,11 @@
 package sourcecode.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import sourcecode.model.Person;
 
 /**
@@ -67,11 +69,6 @@ public class DAO {
         }
     }
     
-    @SuppressWarnings("unchecked")
-    public List<Person> findAll() {
-        return entityManager.createQuery("FROM " + Person.class.getName()).getResultList();
-    }
-    
     public Person findById(int id){
         Person person = null;
         try {
@@ -80,6 +77,46 @@ public class DAO {
             entityManager.getTransaction().rollback();
         }
         return person;
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<Person> findAll() {
+        return entityManager.createQuery("FROM " + Person.class.getName()).getResultList();
+    }
+    
+    public List<Person> findByName(String name){
+        Query consulta = entityManager.createQuery("FROM " + Person.class.getName() + " WHERE name=:nm");
+        consulta.setParameter("nm", name);
+        
+        return consulta.getResultList();
+    }
+    
+    public List<Person> findByAddress(String address){
+        Query consulta = entityManager.createQuery("FROM " + Person.class.getName() + " WHERE address=:ads");
+        consulta.setParameter("ads", address);
+        
+        return consulta.getResultList();
+    }
+
+    public List<Person> findByEmail(String email){
+        Query consulta = entityManager.createQuery("FROM " + Person.class.getName() + " WHERE email=:em");
+        consulta.setParameter("em", email);
+        
+        return consulta.getResultList();
+    }
+    
+    public List<Person> findByBirthday(String birthday){
+        Query consulta = entityManager.createQuery("FROM " + Person.class.getName() + " WHERE birthday=:bt");
+        consulta.setParameter("bt", birthday);
+        
+        return consulta.getResultList();
+    }
+    
+    public List<Person> findByNumber(String number){
+        Query consulta = entityManager.createQuery("FROM " + Person.class.getName() + " WHERE number=:nb");
+        consulta.setParameter("nb", number);
+        
+        return consulta.getResultList();
     }
     
     public void closeEntityManager(){
